@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 import React from "react";
 
 const Footer: React.FC = () => {
@@ -14,9 +14,9 @@ const Footer: React.FC = () => {
     >
       <div className="w-full flex flex-col items-center">
         <p className="text-base text-[var(--foreground)] font-semibold text-center mb-2">
-          ©2025 Developed by Zazmic Inc. Powered by{" "}
+          ©2025 Developed by Devnoz Powered by{" "}
           <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] bg-clip-text text-transparent font-bold">
-            Google Vertex AI and Gemini
+            OpenAi
           </span>{" "}
           <span className="font-normal">All rights reserved</span>
         </p>
@@ -24,20 +24,16 @@ const Footer: React.FC = () => {
           <a
             href="#"
             className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] text-white rounded-full hover:scale-110 transition shadow-card"
+            aria-label="GitHub"
           >
-            <Facebook />
+            <Github />
           </a>
           <a
             href="#"
             className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] text-white rounded-full hover:scale-110 transition shadow-card"
+            aria-label="LinkedIn"
           >
-            <Twitter />
-          </a>
-          <a
-            href="#"
-            className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] text-white rounded-full hover:scale-110 transition shadow-card"
-          >
-            <Instagram />
+            <Linkedin />
           </a>
         </div>
       </div>

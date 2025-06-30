@@ -2,37 +2,34 @@ import ClassifyIssueAction from "@/actions/ClassifyIssueAction";
 import GetAllEmailsAction from "@/actions/GetAllEmailsAction";
 import React, { useEffect, useState } from "react";
 import EmailList from "../EmailList/EmailList";
-
 import { useEmailContext } from "@/context/EmailContext";
+import { BookCheck, Search } from "lucide-react";
+import { Email } from "@/types";
 
-import { BookCheck, Download, Plus, Search } from "lucide-react";
 const Subjects = () => {
   const { emails, setEmails, result, setResult, setIsLoading, setTitleEmail } =
     useEmailContext();
   const [openEmailId, setOpenEmailId] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
-
   const [containerHeight, setContainerHeight] = useState("86vh");
-  const [isHeight, setIsHeight] = useState("500px");
+
   useEffect(() => {
-    const updateHeight = () => {
+    function updateHeight() {
       const windowHeight = window.innerHeight;
       setContainerHeight(windowHeight < 900 ? "86vh" : "89vh");
-      setIsHeight(windowHeight < 900 ? "500px" : "1000px");
-    };
-
+    }
     updateHeight();
     window.addEventListener("resize", updateHeight);
-
     return () => window.removeEventListener("resize", updateHeight);
   }, []);
+
   useEffect(() => {
-    const loadEmails = async () => {
+    async function loadEmails() {
       const result = await GetAllEmailsAction();
       setEmails(result);
-    };
+    }
     loadEmails();
-  }, []);
+  }, [setEmails]);
 
   const cleanEmailBody = (textString: string) => {
     return textString
@@ -46,70 +43,26 @@ const Subjects = () => {
     setOpenEmailId(openEmailId === id ? null : id);
   };
 
-  const filteredEmails = emails.filter((email) =>
+  const filteredEmails = emails.filter((email: Email) =>
     email.subject.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const handleClassifyIssue = async () => {
-    try {
-      setIsLoading(true);
-
-      if (openEmailId) {
-        setTitleEmail(
-          emails.find((email) => email.id === openEmailId)?.subject
-        );
-
-        const classificationResult = await ClassifyIssueAction(openEmailId);
-        setResult(classificationResult);
-      }
-    } catch (error) {
-      console.error("Error classifying email", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
-    <div
-      className={`flex w-3/4 flex-col bg-white px-7 py-4 rounded-xl`}
-      style={{ height: containerHeight }}
+    <section
+      className="glass flex flex-col px-8 py-8 w-full max-w-2xl min-h-[70vh] border border-[var(--primary)] shadow-card mb-8"
+      style={{ height: "70vh", maxHeight: "70vh" }}
     >
-      <div className="flex items-center justify-between h-[65px]">
-        <h2 className="text-2xl   text-black">Emails</h2>
-        <div className="flex items-center gap-3">
-          <button className="px-4 text-[15px] py-[6px] flex items-center gap-2 border border-[#7A757F] rounded-xl text-[#0070ff] hover:bg-[#7a757f18]">
-            <Download size={16} /> Import
-          </button>
-          <button className="px-4  text-[15px] py-[6px] flex items-center gap-2 border border-[#7A757F] rounded-xl text-[#0070ff] hover:bg-[#7a757f18]">
-            <Plus size={16} /> Add New
-          </button>
-          <button
-            onClick={handleClassifyIssue}
-            className="px-4 py-[6px] text-[15px] bg-[#5475ff] text-white flex items-center gap-2 border border-[#96a7ff] rounded-xl transition-all ease-in-out duration-300  hover:opacity-90"
-          >
-            <BookCheck size={16} />
-            <div>
-              Classify
-              {openEmailId && <span>(1)</span>}
-            </div>
-          </button>
-        </div>
-      </div>
-      <div className="mb-5 relative">
+      <div className="flex items-center gap-3 mb-6">
+        <Search className="text-[var(--primary)]" />
         <input
           type="text"
-          placeholder="Start typing to search..."
+          placeholder="Search emails..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="border w-full border-black px-3 py-2 text-lg h-[50px] pl-9 outline-none rounded-md "
+          className="flex-1 px-6 py-4 text-lg rounded-lg border border-[var(--primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] bg-[rgba(255,255,255,0.12)] text-[var(--foreground)] placeholder:text-[var(--foreground)]"
         />
-        <Search size={19} className="absolute top-4 left-2.5" />
       </div>
-
-      <div
-        className={`flex flex-col w-full overflow-scroll p-2 rounded-lg`}
-        style={{ height: isHeight }}
-      >
+      <div className="flex-1 overflow-y-auto">
         <EmailList
           filteredEmails={filteredEmails}
           openEmailId={openEmailId}
@@ -117,7 +70,24 @@ const Subjects = () => {
           cleanEmailBody={cleanEmailBody}
         />
       </div>
-    </div>
+      <button
+        className="mt-6 w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] text-white font-bold py-3 rounded-lg shadow-card hover:scale-105 transition"
+        onClick={async () => {
+          if (openEmailId !== null) {
+            setIsLoading(true);
+            setTitleEmail(
+              filteredEmails.find((e) => e.id === openEmailId)?.subject || ""
+            );
+            const res = await ClassifyIssueAction(openEmailId);
+            setResult(res);
+            setIsLoading(false);
+          }
+        }}
+        disabled={openEmailId === null}
+      >
+        <BookCheck /> Classify
+      </button>
+    </section>
   );
 };
 

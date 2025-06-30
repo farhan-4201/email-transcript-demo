@@ -1,5 +1,5 @@
 "use client";
-import AuthLogin from "@/components/AuthLogin/AuthLogin";
+import Login from "@/components/Login/Login";
 import MainLayout from "@/components/MainLayout/MainLayout";
 import { EmailProvider } from "@/context/EmailContext";
 
@@ -24,7 +24,7 @@ export default function Home() {
           </EmailProvider>
         </main>
       ) : loader ? (
-        <AuthLogin onLogin={handleLogin} />
+        <Login onLogin={handleLogin} />
       ) : null}
     </>
   );

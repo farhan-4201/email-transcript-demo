@@ -10,12 +10,12 @@ import TextChanger from "../TextChanger/TextChanger";
 
 const Results = () => {
   const { result, isLoading } = useEmailContext();
-  const [containerHeight, setContainerHeight] = useState<string>("86vh");
+  const [containerHeight, setContainerHeight] = useState<string>("auto");
 
   useEffect(() => {
     const updateHeight = () => {
       const windowHeight = window.innerHeight;
-      setContainerHeight(windowHeight < 900 ? "86vh" : "89vh");
+      setContainerHeight(windowHeight < 900 ? "auto" : "auto");
     };
 
     updateHeight();
@@ -24,31 +24,29 @@ const Results = () => {
     return () => window.removeEventListener("resize", updateHeight);
   }, []);
   return (
-    <div
-      className={`flex w-1/2 flex-col bg-white px-7 py-4 rounded-xl items-center justify-center`}
-      style={{ height: containerHeight }}
+    <section
+      className="w-full flex flex-col bg-gradient-to-br from-[#232526] via-[#485563] to-[#00c6ff] px-6 py-5 rounded-2xl shadow-card items-center border border-[var(--primary)] backdrop-blur-md mb-8"
+      style={{ minHeight: 220, marginTop: 0 }}
     >
       <div className="flex flex-col w-full h-full">
-        <div className="flex items-center justify-between h-[65px]">
-          <h2 className="text-2xl  text-black">Classification Result</h2>
+        <div className="flex items-center justify-between h-[50px] mb-2">
+          <h2 className="text-xl font-bold text-[var(--primary)] tracking-wide">
+            Classification Result
+          </h2>
         </div>
-        <div className="flex flex-col w-full h-full overflow-y-auto p-3 rounded-lg bg-[#e0f1ff]">
+        <div className="flex flex-col w-full h-full overflow-y-auto p-3 rounded-xl bg-[var(--muted)] min-h-[120px]">
           {isLoading ? (
             <div className="flex flex-col justify-center items-center h-full gap-3">
               <TextChanger />
             </div>
+          ) : result && result.issue ? (
+            <EmailResult result={result} />
           ) : (
-            <>
-              {result && result.issue ? (
-                <EmailResult result={result} />
-              ) : (
-                <NoResults />
-              )}
-            </>
+            <NoResults />
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

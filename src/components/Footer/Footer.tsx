@@ -3,30 +3,45 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <div className="flex py-3 border-t border-gray-200 w-full justify-center items-center">
-      <div className="container mx-auto max-w-screen-xl w-[62%]">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex space-x-6">
-            <div className="w-9 h-9 flex items-center justify-center bg-[#d0eaff] text-black rounded-full">
-              <Facebook />
-            </div>
-            <div className="w-9 h-9 flex items-center justify-center bg-[#d0eaff] text-black  rounded-full">
-              <Twitter />
-            </div>
-            <div className="w-9 h-9 flex items-center justify-center bg-[#d0eaff] text-black  rounded-full">
-              <Instagram />
-            </div>
-          </div>
-          <p className="text-sm text-black font-bold">
-            ©2025 Developed by Zazmic Inc. Powered by{" "}
-            <span className="text-[#0070ff] font-bold">
-              Google Vertex AI and Gemini
-            </span>{" "}
-            <span className="font-normal">All rights reserved</span>
-          </p>
+    <footer
+      className="w-full glass py-4 px-4 flex flex-col items-center justify-center border-t-2 border-[var(--primary)] shadow-card z-50 transition-all duration-300 md:ml-64"
+      style={{
+        backdropFilter: "blur(18px)",
+        background: "rgba(36, 37, 38, 0.7)",
+        minHeight: 60,
+        maxHeight: 80,
+      }}
+    >
+      <div className="w-full flex flex-col items-center">
+        <p className="text-base text-[var(--foreground)] font-semibold text-center mb-2">
+          ©2025 Developed by Zazmic Inc. Powered by{" "}
+          <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] bg-clip-text text-transparent font-bold">
+            Google Vertex AI and Gemini
+          </span>{" "}
+          <span className="font-normal">All rights reserved</span>
+        </p>
+        <div className="flex space-x-5">
+          <a
+            href="#"
+            className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] text-white rounded-full hover:scale-110 transition shadow-card"
+          >
+            <Facebook />
+          </a>
+          <a
+            href="#"
+            className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] text-white rounded-full hover:scale-110 transition shadow-card"
+          >
+            <Twitter />
+          </a>
+          <a
+            href="#"
+            className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] text-white rounded-full hover:scale-110 transition shadow-card"
+          >
+            <Instagram />
+          </a>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
 

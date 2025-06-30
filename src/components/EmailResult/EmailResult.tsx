@@ -1,6 +1,6 @@
 import { useEmailContext } from "@/context/EmailContext";
 import { ClassifyEmailResponse } from "@/types";
-import { Box, Calendar, ChevronDown, ChevronRight, Clock } from "lucide-react";
+import { Calendar, ChevronDown, ChevronRight, Clock } from "lucide-react";
 import React, { useState } from "react";
 
 const EmailResult = ({ result }: { result: ClassifyEmailResponse | null }) => {
@@ -11,48 +11,56 @@ const EmailResult = ({ result }: { result: ClassifyEmailResponse | null }) => {
 
   return (
     <div
-      className="border-b border-[#CBC4CF] p-4 flex items-start relative cursor-pointer"
+      className="rounded-card shadow-card bg-white border border-[var(--border)] p-6 mb-4 flex flex-col gap-2 cursor-pointer transition-all"
       onClick={() => setExpanded(!expanded)}
     >
-      <button className="text-black mr-2 flex-shrink-0">
-        {expanded ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
-      </button>
-      <div className="text-black">
-        <p className="max-w-[350px] font-medium overflow-hidden text-ellipsis whitespace-nowrap">
+      <div className="flex items-center gap-2 mb-2">
+        <button className="text-[var(--primary)] focus:outline-none">
+          {expanded ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
+        </button>
+        <span className="font-semibold text-lg text-[var(--primary)] max-w-[350px] overflow-hidden text-ellipsis whitespace-nowrap">
           {titleEmail}
-        </p>
-        <div
-          className={`transition-[max-height] duration-300 ease-in-out overflow-hidden ${
-            expanded ? "max-h-[1000px]" : "max-h-0"
-          }`}
-        >
-          <div className="mt-2">
-            <p>
-              <strong>Reason:</strong> {result?.issue?.reason}
-            </p>
-            <p>
-              <strong>Responsible party:</strong>{" "}
+        </span>
+      </div>
+      <div
+        className={`transition-[max-height] duration-300 ease-in-out overflow-hidden ${
+          expanded ? "max-h-[1000px]" : "max-h-0"
+        }`}
+      >
+        <div className="pl-7">
+          <p className="mb-1">
+            <strong>Reason:</strong>{" "}
+            <span className="text-[var(--foreground)]">
+              {result?.issue?.reason}
+            </span>
+          </p>
+          <p className="mb-1">
+            <strong>Responsible party:</strong>{" "}
+            <span className="text-[var(--foreground)]">
               {result?.issue?.responsible_party}
-            </p>
-            <p>
-              <strong>Reasoning:</strong> {result?.issue?.reasoning}
-            </p>
-            <p>
-              <strong>Details:</strong> {result?.issue?.details}
-            </p>
+            </span>
+          </p>
+          <p className="mb-1">
+            <strong>Reasoning:</strong>{" "}
+            <span className="text-[var(--foreground)]">
+              {result?.issue?.reasoning}
+            </span>
+          </p>
+          <p className="mb-1">
+            <strong>Details:</strong>{" "}
+            <span className="text-[var(--foreground)]">
+              {result?.issue?.details}
+            </span>
+          </p>
+        </div>
+        <div className="flex items-center justify-between pt-3 mt-2 text-sm pl-7">
+          <div className="flex items-center gap-2 text-[var(--accent)]">
+            <Calendar size={16} className="mr-1" />
+            {formattedDate}
           </div>
-          <div className="flex items-center justify-between pt-2 mt-2  text-sm">
-            <div className="flex items-center gap-2">
-              <Calendar size={16} className="mr-1" />
-              {formattedDate}
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock size={16} className="mr-1" />
-              {result?.duration || "0"} ms
-            </div>
-            <div className="flex items-center gap-2">
-              <Box size={16} /> {result?.model || "Unknown"}
-            </div>
+          <div className="flex items-center gap-2 text-[var(--accent)]">
+            <Clock size={16} className="mr-1" />
+            {new Date().toLocaleTimeString()}
           </div>
         </div>
       </div>

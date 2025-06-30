@@ -25,7 +25,7 @@ const Results = () => {
   }, []);
   return (
     <section
-      className="w-full flex flex-col bg-gradient-to-br from-[#232526] via-[#485563] to-[#00c6ff] px-6 py-5 rounded-2xl shadow-card items-center border border-[var(--primary)] backdrop-blur-md mb-8"
+      className="w-full flex flex-col bg-white/90 px-6 py-5 rounded-2xl shadow-card items-center border border-[var(--primary)] backdrop-blur-md mb-8"
       style={{ minHeight: 220, marginTop: 0 }}
     >
       <div className="flex flex-col w-full h-full">
@@ -34,7 +34,7 @@ const Results = () => {
             Classification Result
           </h2>
         </div>
-        <div className="flex flex-col w-full h-full overflow-y-auto p-3 rounded-xl bg-[var(--muted)] min-h-[120px]">
+        <div className="flex flex-col w-full h-full overflow-y-auto p-3 rounded-xl bg-white/80 min-h-[120px] text-black">
           {isLoading ? (
             <div className="flex flex-col justify-center items-center h-full gap-3">
               <TextChanger />

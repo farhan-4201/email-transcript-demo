@@ -1,4 +1,5 @@
 "use client";
+require("dotenv").config();
 import Login from "@/components/Login/Login";
 import MainLayout from "@/components/MainLayout/MainLayout";
 import { EmailProvider } from "@/context/EmailContext";

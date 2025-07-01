@@ -11,7 +11,7 @@ const EmailResult = ({ result }: { result: ClassifyEmailResponse | null }) => {
 
   return (
     <div
-      className="rounded-card shadow-card bg-white border border-[var(--border)] p-6 mb-4 flex flex-col gap-2 cursor-pointer transition-all"
+      className="rounded-card shadow-card border border-[var(--primary)] p-6 mb-4 flex flex-col gap-2 cursor-pointer transition-all bg-gradient-to-br from-[#232526] via-[#485563] to-[#00c6ff] text-[var(--foreground)]"
       onClick={() => setExpanded(!expanded)}
     >
       <div className="flex items-center gap-2 mb-2">

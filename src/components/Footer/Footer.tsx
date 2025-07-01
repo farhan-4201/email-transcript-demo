@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
         <p className="text-base text-[var(--foreground)] font-semibold text-center mb-2">
           ©2025 Developed by Devnoz Powered by{" "}
           <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] bg-clip-text text-transparent font-bold">
-            OpenAi
+            GrokAi
           </span>{" "}
           <span className="font-normal">All rights reserved</span>
         </p>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FileQuestion, LayoutDashboard, LifeBuoy, X, Menu } from 'lucide-react';
 import Image from "next/image";
-import Logo from "@/assets/images/logistick.png";
+import Logo from "@/assets/images/devzon.png";
 import Avatar from "@/assets/images/avatar.png";
 
 function Sidebar() {

@@ -12,6 +12,7 @@ const Subjects = () => {
   const [openEmailId, setOpenEmailId] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [containerHeight, setContainerHeight] = useState("86vh");
+  const [showSearch, setShowSearch] = useState(false);
 
   useEffect(() => {
     function updateHeight() {
@@ -52,14 +53,25 @@ const Subjects = () => {
       className="glass flex flex-col px-8 py-8 w-full max-w-2xl min-h-[70vh] border border-[var(--primary)] shadow-card mb-8"
       style={{ height: "70vh", maxHeight: "70vh" }}
     >
-      <div className="flex items-center gap-3 mb-6">
-        <Search className="text-[var(--primary)]" />
+      <div className="flex items-center justify-center gap-3 mb-6 w-full">
+        <button
+          className="p-2 rounded-full bg-[var(--primary)] text-white hover:bg-[var(--accent)] transition-all focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+          onClick={() => setShowSearch((prev) => !prev)}
+          aria-label="Toggle search bar"
+        >
+          <Search className="w-6 h-6" />
+        </button>
         <input
           type="text"
           placeholder="Search emails..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="flex-1 px-6 py-4 text-lg rounded-lg border border-[var(--primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] bg-[rgba(255,255,255,0.12)] text-[var(--foreground)] placeholder:text-[var(--foreground)]"
+          className={`flex-1 px-6 py-4 text-lg rounded-lg border border-[var(--primary)] bg-[rgba(255,255,255,0.12)] text-[var(--foreground)] placeholder:text-[var(--foreground)] transition-all duration-300 ${
+            showSearch
+              ? "opacity-100 w-full ml-2"
+              : "opacity-0 w-0 ml-0 pointer-events-none"
+          }`}
+          style={{ minWidth: showSearch ? 200 : 0, maxWidth: 400 }}
         />
       </div>
       <div className="flex-1 overflow-y-auto">

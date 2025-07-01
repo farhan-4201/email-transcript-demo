@@ -47,7 +47,6 @@ body {
 .overflow-scroll {
   overflow-y: auto;
 }
-
 .overflow-scroll::-webkit-scrollbar {
   width: 8px;
 }

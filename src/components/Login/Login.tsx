@@ -2,7 +2,7 @@
 import React, { useState, ChangeEvent, KeyboardEvent } from "react";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
-import Logo from "../../assets/images/log5.avif";
+import Logo from "../../assets/images/classifier.jpg";
 
 interface LoginProps {
   onLogin: () => void;

@@ -1,5 +1,5 @@
 import React from "react";
-import ImageLogo from "@/assets/images/logistick.png";
+import ImageLogo from "@/assets/images/classifier.jpg";
 import Image from "next/image";
 const NoResults = () => {
   return (

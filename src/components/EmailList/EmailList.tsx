@@ -48,7 +48,7 @@ const EmailList = ({
           </div>
           {openEmailId === email.id && (
             <div className="px-6 pb-4 pt-2 text-sm text-[var(--foreground)] bg-[rgba(255,255,255,0.15)] rounded-b-2xl">
-              {cleanEmailBody(email.body)}
+              {cleanEmailBody(email.content || email.body || "")}
             </div>
           )}
         </div>

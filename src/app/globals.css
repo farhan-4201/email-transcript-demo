@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --background: linear-gradient(135deg, #232526 0%, #414345 100%);
+  --background: linear-gradient(135deg, #18181b 0%, #232526 100%);
   --foreground: #f3f4f6;
   --primary: #00c6ff;
   --secondary: #0072ff;
   --accent: #f7971e;
-  --muted: rgba(255,255,255,0.08);
+  --muted: rgba(0,0,0,0.7); /* black glass effect */
   --border: rgba(255,255,255,0.18);
   --radius: 1.25rem;
   --glass-blur: 18px;
@@ -17,7 +17,7 @@
 body, html {
   min-height: 100vh;
   width: 100vw;
-  background: linear-gradient(90deg, #1e5397 0%, #1f4eff 50%, #3b8afa 100%);
+  background: var(--background);
   color: var(--foreground);
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   letter-spacing: 0.01em;

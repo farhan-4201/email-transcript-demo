@@ -35,58 +35,56 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-r from-[#1e5397] via-[#1f4eff] to-[#3b8afa]">
-      <div className="flex flex-col items-center justify-center w-full h-full min-h-screen bg-gradient-to-br from-white/30 via-white/10 to-white/0 backdrop-blur-md">
-        <div className="backdrop-blur-md bg-white/20 shadow-2xl rounded-2xl px-10 py-12 flex flex-col items-center w-full max-w-md mx-4">
-          <Image
-            src={Logo}
-            width={70}
-            height={70}
-            alt="Logo"
-            className="mb-4 rounded-full shadow-lg"
+    <div className="min-h-screen w-full flex items-center justify-center">
+      <div className="glass flex flex-col items-center justify-center w-full h-full max-w-md mx-4 p-10">
+        <Image
+          src={Logo}
+          width={70}
+          height={70}
+          alt="Logo"
+          className="mb-4 rounded-full shadow-lg"
+        />
+        <h1 className="text-3xl font-extrabold text-[var(--primary)] mb-2 tracking-tight drop-shadow-lg">
+          Sign In
+        </h1>
+        <p className="text-[var(--foreground)] mb-8 text-base font-medium">
+          Welcome back! Please enter your credentials.
+        </p>
+        <div className="w-full mb-5">
+          <input
+            className="w-full h-12 px-4 border border-[var(--primary)] rounded-lg focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--primary)] focus:outline-none text-lg bg-transparent text-[var(--foreground)] placeholder:text-[var(--foreground)]/70 transition"
+            type="text"
+            placeholder="Username"
+            value={username || ""}
+            onChange={(e) => setUsername(e.target.value)}
+            autoComplete="username"
           />
-          <h1 className="text-3xl font-extrabold text-white mb-2 tracking-tight drop-shadow-lg">
-            Sign In
-          </h1>
-          <p className="text-white/80 mb-8 text-base font-medium">
-            Welcome back! Please enter your credentials.
-          </p>
-          <div className="w-full mb-5">
-            <input
-              className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none text-lg bg-white/80 placeholder-gray-500 transition"
-              type="text"
-              placeholder="Username"
-              value={username || ""}
-              onChange={(e) => setUsername(e.target.value)}
-              autoComplete="username"
-            />
-          </div>
-          <div className="w-full mb-7">
-            <input
-              className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none text-lg bg-white/80 placeholder-gray-500 transition"
-              type="password"
-              placeholder="Password"
-              value={password || ""}
-              onChange={(e) => setPassword(e.target.value)}
-              onKeyDown={handleKeyDown}
-              autoComplete="current-password"
-            />
-          </div>
-          <button
-            className={`w-full h-12 flex items-center justify-center gap-3 rounded-lg text-lg font-semibold transition-colors duration-200 shadow-md
-              ${
-                username && password
-                  ? "bg-[#3b8afa] text-white hover:bg-blue-600"
-                  : "bg-gray-300 text-gray-400 cursor-not-allowed"
-              }
-            `}
-            onClick={handleLogin}
-            disabled={!username || !password}
-          >
-            Sign In
-            <ChevronRight size={22} />
-          </button>
         </div>
+        <div className="w-full mb-7">
+          <input
+            className="w-full h-12 px-4 border border-[var(--primary)] rounded-lg focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--primary)] focus:outline-none text-lg bg-transparent text-[var(--foreground)] placeholder:text-[var(--foreground)]/70 transition"
+            type="password"
+            placeholder="Password"
+            value={password || ""}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleKeyDown}
+            autoComplete="current-password"
+          />
+        </div>
+        <button
+          className={`w-full h-12 flex items-center justify-center gap-3 rounded-lg text-lg font-semibold transition-colors duration-200 shadow-md
+            ${
+              username && password
+                ? "bg-[var(--primary)] text-white hover:bg-[var(--accent)]"
+                : "bg-gray-300 text-gray-400 cursor-not-allowed"
+            }
+          `}
+          onClick={handleLogin}
+          disabled={!username || !password}
+        >
+          <span className="text-white">Sign In</span>
+          <ChevronRight size={22} />
+        </button>
       </div>
     </div>
   );

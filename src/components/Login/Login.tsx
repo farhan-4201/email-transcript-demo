@@ -35,43 +35,59 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-[#1e5397] via-[#1f4eff] to-[#3b8afa] text-center font-bold text-2xl gap-4">
-      <Image src={Logo} width={50} height={50} alt="Logo" />
-
-      <div className="mb-4">
-        <input
-          className="w-80 h-15 p-4 border-2 border-black rounded-lg focus:border-blue-500 focus:outline-none text-xl"
-          type="text"
-          placeholder="Username"
-          value={username || ""}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-r from-[#1e5397] via-[#1f4eff] to-[#3b8afa]">
+      <div className="flex flex-col items-center justify-center w-full h-full min-h-screen bg-gradient-to-br from-white/30 via-white/10 to-white/0 backdrop-blur-md">
+        <div className="backdrop-blur-md bg-white/20 shadow-2xl rounded-2xl px-10 py-12 flex flex-col items-center w-full max-w-md mx-4">
+          <Image
+            src={Logo}
+            width={70}
+            height={70}
+            alt="Logo"
+            className="mb-4 rounded-full shadow-lg"
+          />
+          <h1 className="text-3xl font-extrabold text-white mb-2 tracking-tight drop-shadow-lg">
+            Sign In
+          </h1>
+          <p className="text-white/80 mb-8 text-base font-medium">
+            Welcome back! Please enter your credentials.
+          </p>
+          <div className="w-full mb-5">
+            <input
+              className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none text-lg bg-white/80 placeholder-gray-500 transition"
+              type="text"
+              placeholder="Username"
+              value={username || ""}
+              onChange={(e) => setUsername(e.target.value)}
+              autoComplete="username"
+            />
+          </div>
+          <div className="w-full mb-7">
+            <input
+              className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none text-lg bg-white/80 placeholder-gray-500 transition"
+              type="password"
+              placeholder="Password"
+              value={password || ""}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={handleKeyDown}
+              autoComplete="current-password"
+            />
+          </div>
+          <button
+            className={`w-full h-12 flex items-center justify-center gap-3 rounded-lg text-lg font-semibold transition-colors duration-200 shadow-md
+              ${
+                username && password
+                  ? "bg-[#3b8afa] text-white hover:bg-blue-600"
+                  : "bg-gray-300 text-gray-400 cursor-not-allowed"
+              }
+            `}
+            onClick={handleLogin}
+            disabled={!username || !password}
+          >
+            Sign In
+            <ChevronRight size={22} />
+          </button>
+        </div>
       </div>
-
-      <div className="mb-4">
-        <input
-          className="w-80 h-15 p-4 border-2 border-black rounded-lg focus:border-blue-500 focus:outline-none text-xl"
-          type="password"
-          placeholder="Password"
-          value={password || ""}
-          onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
-      </div>
-
-      <button
-        className={`w-80 h-15 px-8 py-4 flex items-center justify-center gap-4 rounded-lg text-xl font-semibold transition-colors duration-200 
-          ${
-            username && password
-              ? "bg-[#3b8afa] text-white hover:bg-blue-500"
-              : "bg-gray-400 text-gray-200 cursor-not-allowed"
-          }`}
-        onClick={handleLogin}
-        disabled={!username || !password}
-      >
-        Sign In
-        <ChevronRight size={24} />
-      </button>
     </div>
   );
 };

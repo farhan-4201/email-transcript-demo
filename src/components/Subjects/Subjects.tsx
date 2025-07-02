@@ -50,8 +50,8 @@ const Subjects = () => {
 
   return (
     <section
-      className="glass flex flex-col px-8 py-8 w-full max-w-2xl min-h-[70vh] border border-[var(--primary)] shadow-card mb-8"
-      style={{ height: "70vh", maxHeight: "70vh" }}
+      className="glass flex flex-col px-8 py-8 w-full flex-1 h-full border border-[var(--primary)] shadow-card mb-0"
+      style={{ height: "100%", maxHeight: "100%" }}
     >
       <div className="flex items-center justify-center gap-3 mb-6 w-full">
         <button

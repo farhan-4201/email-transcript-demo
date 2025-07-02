@@ -4,9 +4,13 @@ import Image from "next/image";
 import Logo from "@/assets/images/devzon.png";
 import Avatar from "@/assets/images/avatar.png";
 
-function Sidebar() {
+interface SidebarProps {
+  activeSection?: number;
+  setActiveSection?: (idx: number) => void;
+}
+
+function Sidebar({ activeSection = 0, setActiveSection }: SidebarProps) {
   const [open, setOpen] = useState(true);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   const slideArr = [
     { text: 'Dashboard', icon: <LayoutDashboard />, variantValue: 0 },
@@ -39,8 +43,8 @@ function Sidebar() {
       <nav className="flex flex-col gap-6 flex-1 w-full mt-8">
         {slideArr.map((el, id) => (
           <button
-            onClick={() => setActiveIndex(id)}
-            className={`flex flex-row items-center gap-4 px-4 py-3 rounded-xl transition-all font-bold text-base w-full ${activeIndex === id ? 'bg-[var(--primary)] text-white shadow-card' : 'hover:bg-[var(--muted)] text-[var(--foreground)]'}`}
+            onClick={() => setActiveSection && setActiveSection(id)}
+            className={`flex flex-row items-center gap-4 px-4 py-3 rounded-xl transition-all font-bold text-base w-full ${activeSection === id ? 'bg-[var(--primary)] text-white shadow-card' : 'hover:bg-[var(--muted)] text-[var(--foreground)]'}`}
             key={id}
           >
             <span className="text-2xl">{el.icon}</span>

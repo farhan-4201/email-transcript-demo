@@ -26,8 +26,14 @@ const Results = () => {
   }, []);
   return (
     <section
-      className="w-full flex flex-col bg-gradient-to-br from-[#232526] via-[#485563] to-[#00c6ff] px-6 py-6 rounded-2xl shadow-card items-center border border-[var(--primary)] backdrop-blur-lg mb-8"
-      style={{ minHeight: 220, marginTop: 0, color: "#f3f4f6" }}
+      className="w-full flex flex-col flex-1 h-full bg-gradient-to-br from-[#232526] via-[#485563] to-[#00c6ff] px-6 py-6 rounded-2xl shadow-card items-center border border-[var(--primary)] backdrop-blur-lg mb-0"
+      style={{
+        height: "100%",
+        maxHeight: "100%",
+        minHeight: 0,
+        marginTop: 0,
+        color: "#f3f4f6",
+      }}
     >
       <div className="flex flex-col w-full h-full">
         <div className="flex items-center justify-between h-[50px] mb-2">

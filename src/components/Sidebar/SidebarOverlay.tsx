@@ -1,10 +1,10 @@
 import React from "react";
 import Sidebar from "./Sidebar";
 
-function SidebarOverlay() {
+function SidebarOverlay({ activeSection, setActiveSection }: { activeSection: number, setActiveSection: (idx: number) => void }) {
   return (
     <div className="flex h-[100vh]">
-      <Sidebar />
+      <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
     </div>
   );
 }

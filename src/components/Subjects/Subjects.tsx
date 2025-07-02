@@ -48,6 +48,29 @@ const Subjects = () => {
     email.subject.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const MAX_RETRIES = 3;
+  const RETRY_DELAY_MS = 800;
+
+  async function classifyWithRetry(emailId: number, retries = MAX_RETRIES): Promise<any> {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      const res = await ClassifyIssueAction(emailId);
+      // Check if result is valid (not a Grok error or invalid JSON)
+      if (
+        res &&
+        res.issue &&
+        !res.issue.reasoning?.toLowerCase().includes('grok did not return valid json') &&
+        !res.issue.reasoning?.toLowerCase().includes('fetch error')
+      ) {
+        return res;
+      }
+      if (attempt < retries) {
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
+      }
+    }
+    // Return last result (even if error)
+    return await ClassifyIssueAction(emailId);
+  }
+
   return (
     <section
       className="glass flex flex-col px-8 py-8 w-full flex-1 h-full border border-[var(--primary)] shadow-card mb-0"
@@ -90,7 +113,7 @@ const Subjects = () => {
             setTitleEmail(
               filteredEmails.find((e) => e.id === openEmailId)?.subject || ""
             );
-            const res = await ClassifyIssueAction(openEmailId);
+            const res = await classifyWithRetry(openEmailId);
             setResult(res);
             setIsLoading(false);
           }
